@@ -11,39 +11,47 @@
 	<script type="text/javascript" language="JavaScript" src="decode.js"></script>
 </head>
 <body>
-    <script type="text/javascript" type="text/javascript"><!--
+<!-- 暗号化したIDをでコードするとかできないのか？
+    <script type="text/javascript" type="text/javascript">
 	setEncodedKey("8"); //暗号化した暗号化キーを指定
 	var encodedArray = [ //暗号化した結果 (\や"はエスケープしている)
-		"fQN,MY)cEQMQJHPNMNI"
+		"KPZrc1L_EQMQJHPNMNI"
 	];
-    var result = encodedArray;
+    	var result = encodedArray;
 	for (var i=0 ; i<encodedArray.length ; i++) {
 		result[i] = decode(encodedArray[i]);
 	}
-//--></script>
-
+	    document.write("<p>");
+	    document.write(result)
+	document.write("</p>");
+	</script>
     <form class="w-75 mx-auto">
-        <p class="mt-3">名前</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="name" placeholder="山田太郎" required>
-        </div>
-        <p class="mt-3">なまえ</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="name_kana" placeholder="やまだたろう" required>
-        </div>
-        <p class="mt-3">JA番号</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="janum" placeholder="JA123456" required>
-        </div>
-        <p class="mt-3">アップライン</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="upline_name" placeholder="山田花子" required>
-        </div>
-        <p class="mt-3">生年月日</p>
-        <div>
-            <!-- 日付入力 -->
-            <input type="date" name="birthday"></input>
-        </div>
+-->	
+	
+  <div class="container">
+    <div class="navbar">
+      <h3>アクション選択</h3>
+    </div>
+
+    <form>
+      <div class="form-row">
+        <label class="col-sm-3 col-form-label">動作</label>
+        <div class="col-sm-9">
+		<p>
+			<input class="form-control" name="name" placeholder="山田太郎" required />
+		<label>
+			１行テキスト入力欄：
+			<input class="form-control" name="action" placeholder="do" list="sampleDatalist" required />
+		</label>
+		<datalist id="sampleDatalist">
+			<option value="Internet Explorer"></option>
+			<option value="Chrome"></option>
+			<option value="FireFox"></option>
+		</datalist>
+		</p>
+	</div>
+	</div>
+	      
         <input type="submit" class="mt-4 btn btn-primary" value="送信">
     </form>
 
@@ -55,9 +63,10 @@
     <script>
 
         $(document).ready(function () {
-            const liffId = result;
+
+	    const liffId = "1656802959-G4wKZB83";   
             initializeLiff(liffId);
-        })
+        });
 
         function initializeLiff(liffId) {
             liff.init({
@@ -85,13 +94,8 @@
 
         $(function () {
             $('form').submit(function () {
-                const name    = $('input[name="name"]').val();
-                const janum = $('input[name="janum"]').val();
-                const upline_name  = $('input[name="upline_name"]').val();
-                const birthday  = $('input[name="birthday"]').val();
-                const name_kana = $('input[name="name_kana"]').val();
-                const toroku = "登録"
-                const msg = `${toroku}}\n${name}\n${janum}\n${upline_name}\n${birthday}\n${name_kana}`;
+                const action    = $('input[name="action"]').val();
+                const msg = `${action}`;
                 sendText(msg);
                 return false;
             });
